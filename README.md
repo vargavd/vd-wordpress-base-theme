@@ -1,13 +1,12 @@
-A WordPress base theme with WPGulp and TypeScript
+A WordPress base theme with ts and reload support
 ===================
 
-This theme uses [WPGulp](https://github.com/ahmadawais/WPGulp), and extends it with TypeScript support.
+## How to use
 
-- no concatenation - every ts file will compile to a single js file
-- inline sourcemaps (ts file will appear next to the js file)
-- watched directory: `assets/ts`
-- plus some basic wordpress theme file
+1. npm install
+2. npm run startdev
 
-*The sample scss file (`assets/css/globals/_base.scss`) sets the background color to yellow. One of the ts files (`assets/ts/main.ts`) sets the `#page` element's opacity to 0.3.*
+*If you change the folders, then you must adjust the files parameter in the sync npm script (`package.json`)*
 
-*Some basic ts magic (multiple files, namespaces, classes) is also included in the subdirectories.*
+> <sup>SCSS compilation is not included</sup>
+
