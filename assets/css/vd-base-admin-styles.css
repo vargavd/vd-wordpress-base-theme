@@ -1,0 +1,11 @@
+.vd-base-block .vd-base-block-preview {
+  background-color: white;
+  padding: 5px;
+  font-weight: bold;
+  width: 100%;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}

@@ -1,0 +1,567 @@
+// VARIABLES
+$primary: #F2000C;
+$textColor: #333;
+$containerWidth: 1300px;
+$sidePadding: 25px;
+
+$stylesheetUrl: "/wp-content/themes/vd-base-theme";
+
+$mobileBreakpoint: 768px;
+
+
+* {
+  outline: none !important;
+
+  &:focus {
+    outline: none !important;
+    border: none !important;
+  }
+}
+
+// FUNCTIONS
+@mixin center($width) {
+  width: 100%;
+  max-width: $width;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+@mixin center-with-padding($width, $maxWidth, $paddX) {
+  @include center($width);
+
+  @media (max-width: $maxWidth) {
+    padding-left: $paddX;
+    padding-right: $paddX;
+  }
+}
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+  }
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $color;
+  }
+}
+@mixin no-text-select() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none; /* Non-prefixed version, currently
+                 supported by Chrome, Edge, Opera and Firefox */
+}
+
+// GENERAL ELEMENTS
+* {
+  // get rid of that outline
+  outline: none !important;
+
+  &:focus {
+    outline: none !important;
+    border: none !important;
+  }
+}
+html {
+  font-size: 62.5%; // 16px*0.625=10px - it makes defining rem sizes easier
+}
+body {
+  font-family: "Open Sans";
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  line-height: 2.7rem;
+  
+  &.page {
+    margin-bottom: 0;
+  }
+}
+p {
+  font-family: "Open Sans";
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  line-height: 2.7rem;
+}
+a {
+  text-decoration: none; // no underline default
+}
+
+// GENERAL CLASSES
+.container {
+  @include center-with-padding($containerWidth, $containerWidth+2*$sidePadding, $sidePadding);
+}
+.container-no-padding {
+  @include center($containerWidth+2*$sidePadding);
+}
+.section-margin {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  @media (max-width: 500px) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+.top-section-margin {
+  margin-top: 50px;
+
+  @media (max-width: 500px) {
+    margin-top: 40px;
+  }
+}
+.bottom-section-margin {
+  margin-bottom: 50px;
+
+  @media (max-width: 500px) {
+    margin-bottom: 40px;
+  }
+}
+.top-negative-section-margin {
+  margin-top: -50px;
+
+  @media (max-width: 500px) {
+    margin-top: -40px;
+  }
+}
+.bottom-negative-section-margin {
+  margin-bottom: -50px;
+
+  @media (max-width: 500px) {
+    margin-bottom: -40px;
+  }
+}
+
+// GENERAL OBJECTS
+a.st-button-link {
+  background-color: $primary;
+  padding: 22px;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  min-width: 200px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: perspective(1px) translateZ(0);
+  position: relative;
+  transition-property: color;
+  transition-duration: 0.3s;
+
+  &.center {
+    justify-content: center;
+  }
+
+  i {
+    font-size: 18px;
+  }
+
+  // animation: https://ianlunn.github.io/Hover/
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: darken($primary, 10);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition-property: transform;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+  }
+
+  &:hover {
+    &:before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+// GENERAL LAYOUT
+#page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+#masthead {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 105;
+  background: transparent;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px $sidePadding;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+
+    &.header-menu-button {
+      display: none;
+    }
+
+    &#hamburger-menu {
+      font-size: 30px;
+    }
+  }
+
+  #menus {
+    a {
+      color: white;
+      font-family: "Open Sans";
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    #topbar {
+      display: flex;
+      justify-content: flex-end;
+
+      .topbar-item {
+        padding: 0 25px;
+        color: white;
+
+        a {
+          i {
+            margin-right: 8px;
+          }
+
+          &:hover {
+            color: $primary;
+
+            i {
+              color: $primary;
+            }
+          }
+        }
+
+        & + .topbar-item {
+          position: relative;
+
+          &:before {
+            position: absolute;
+            left: 0;
+            top: 6px;
+            height: 15px;
+            width: 1.5px;
+            background-color: white;
+            content: " ";
+          }
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+
+      #topbar-search {
+        display: flex;
+        flex-direction: row-reverse;
+
+        form {
+          display: flex;
+          transition: all 300ms;
+          overflow: hidden;
+          width: 0;
+
+          label {
+            display: flex;
+          }
+
+          &.shown {
+            width: 180px;
+          }
+        }
+
+        #topbar-search-button {
+          margin-left: 10px;
+
+          i {
+            font-size: 16px;
+          }
+
+          &:hover {
+            i {
+              color: $primary;
+            }
+          }
+        }        
+      }
+    }
+
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 20px;
+
+      #primary-menu {
+        display: flex;
+        justify-content: flex-end;
+
+        li {
+          padding-left: 30px;
+
+          a {
+            text-transform: uppercase;
+            position: relative;
+
+            &:before {
+              content: "";
+              position: absolute;
+              width: 1%;
+              height: 3px;
+              bottom: -2px;
+              left: 0;
+              background-color: $primary;
+              visibility: hidden;
+              -webkit-transition: all 0.3s ease-in-out 0s;
+              transition: all 0.3s ease-in-out 0s;
+            }
+
+            &:hover {
+              &:before {
+                width: 100%;
+                visibility: visible;
+              }
+            }
+          }
+        }
+      }
+
+      button.big-cta-menu-item {
+        background-color: $primary;
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: white;
+        margin-left: 30px;
+
+        &:hover {
+          background-color: darken($primary, 10);
+        }
+      }
+    }
+  }
+
+  &.fixed {
+    background: #444;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.7);
+  }
+
+  @media (max-width: $mobileBreakpoint) {
+    button.header-menu-button {
+      display: block;
+    }
+
+    #menus {
+      position: absolute;
+      top: 0;
+      width: 284px;
+      height: 100vh;
+      right: -284px;
+      background-color: white;
+      padding: 50px 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      margin-left: 0;
+      transition: 300ms all;
+
+      &.shown {
+        right: 0;
+      }
+      
+      a {
+        color: $textColor;
+
+        span {
+          display: none;
+        }
+      }
+
+      #mobile-menu-close {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        color: $textColor;
+      }
+
+      #topbar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid lighten($textColor, 60);
+
+        .topbar-item {
+          padding: 0;
+
+          &:before {
+            display: none;
+          }
+
+          a {
+            i {
+              margin-right: 0;
+            }
+          }
+        }
+
+        #topbar-search {
+          position: relative;
+
+          #topbar-search-button {
+            color: $textColor;
+          }
+
+          form {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            
+            &.shown {
+              background-color: white;
+              padding: 5px 10px;
+              width: 190px;
+              box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+            }
+          }
+        }
+      }
+
+      nav {
+        display: flex;
+        flex-direction: column;
+
+        #primary-menu {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin-left: 0;
+
+          li {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-left: 0;
+
+            a {
+              font-weight: 700;
+              width: auto;
+              display: inline-block;
+            }
+          }
+        }
+
+        button.big-cta-menu-item {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+#site-footer {
+  background: #444;
+
+  .container {
+    display: flex;
+    flex-direction: space-between;
+    padding-top: 25px;
+    padding-bottom: 25px;
+
+    #footer-column-1 {
+      width: 30%;
+      display: flex;
+      align-items: center;
+    }
+
+    #footer-column-2 {
+      width: 64%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      #social-icons {
+        margin-bottom: 20px;
+
+        a {
+          color: white;
+
+          &:hover {
+            color: $primary;
+          }
+
+          & + a {
+            margin-left: 10px;
+          }
+        }
+      }
+
+      #secondary-menu {
+        margin: 0;
+        padding-left: 0;
+        display: flex;
+        
+        li {
+          a {
+            color: white;
+
+            &:hover {
+              color: $primary;
+            }
+          }
+
+          & + li {
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+
+    @media (max-width: $mobileBreakpoint) {
+      flex-direction: column;
+      
+      #footer-column-1 {
+        width: 100%;
+        justify-content: center;
+      }
+
+      #footer-column-2 {
+        width: 100%;
+        align-items: center;
+        margin-top: 20px;
+
+        #social-icons {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
+
+
+body.admin-bar {
+  #masthead {
+    top: 32px;
+  }
+}
