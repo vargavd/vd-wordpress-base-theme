@@ -1097,6 +1097,7 @@ a.st-button-link:hover:before {
   justify-content: space-between;
   min-height: 100vh;
   position: relative;
+  padding-top: 125px;
 }
 
 #masthead {
@@ -1104,7 +1105,9 @@ a.st-button-link:hover:before {
   top: 0;
   width: 100%;
   z-index: 105;
-  background: transparent;
+  background: #444;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.7);
+  max-height: 125px;
 }
 #masthead .container {
   display: flex;

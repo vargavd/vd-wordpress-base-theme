@@ -9,7 +9,9 @@
 
 include "inc/helper.php";
 include "inc/enqueue.php";
-include "inc/setup.php";
+include "setup/acf-options-page.php";
+include "setup/customize-block-editor.php";
+include "setup/image-sizes.php";
 
 if ( ! function_exists( 'vd_base_setup' ) ) :
 	/**
@@ -135,7 +137,12 @@ add_action( 'wp_enqueue_scripts', 'vd_base_scripts' );
 /* ADMIN STYLES */
 add_action( 'admin_enqueue_scripts', function () {
     vd_base_enqueue_style_with_filetime('vd_base-admin-styles', '/assets/css/vd-base-admin-styles.css', NULL);
-} );
+});
+
+/* GUTENBERG EDITOR CUSTOM STYLES */
+add_action( 'enqueue_block_assets', function () {
+  vd_base_enqueue_style_with_filetime('vd_base-admin-styles', '/assets/css/vd-base-block-editor-styles.css', NULL);
+});
 
 
 /**
